@@ -80,7 +80,6 @@ namespace monitoringLan
                         ip = ip,
                         date = DateTime.Now
                     });
-
                     
                     myDevice.status = status;
                     db.Entry(myDevice).State = System.Data.Entity.EntityState.Modified;
