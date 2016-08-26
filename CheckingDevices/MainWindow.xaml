@@ -1,0 +1,110 @@
+﻿<Window x:Class="CheckingDevices.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CheckingDevices"
+        mc:Ignorable="d"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Stretch"
+        Title="MainWindow" Width="auto">
+    
+    <Grid  x:Name="gridAll" Margin="10,10,10,10" FocusManager.FocusedElement="{Binding ElementName=Text_Filtr_DataGrid_Athletes}" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" VerticalAlignment="Top" Margin="5,5,5,5" HorizontalAlignment="Left">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Экспорт БД в excel" Click="exportExcel"></MenuItem>
+                <MenuItem Header="Ипорт БД из excel" Click="importExcel"/>              
+                <Separator />
+                <MenuItem Header="Выход" Click="MenuItem_Click_exit" ToolTip="Выход"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Редактировать" >
+                <MenuItem Header="Справочники">
+                    <MenuItem Header="Устройства" Click="MenuItem_Click"></MenuItem>                   
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Настройки" ></MenuItem>
+        </Menu>
+
+        <GroupBox Grid.Row="1" Margin="5,5,5,5" VerticalAlignment="Stretch">
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Поиск" Grid.Column="0" VerticalAlignment="Center" Margin="10,10,10,10"/>
+
+                <Button x:Name="Btn_Grid_Update" Grid.Column="2" VerticalAlignment="Center" Margin="10,10,10,10" HorizontalAlignment="Left" 
+                                    Width="auto" Padding="5,5,5,5" Click="Btn_Grid_Update_Click" >Сбросить</Button>
+
+                <!--<Button x:Name="addAthlets" Grid.Column="3" VerticalAlignment="Center" Margin="10,10,10,10" HorizontalAlignment="Left" Padding="5,5,5,5"
+                        Click="addAthlets_Click">Добавить</Button>-->
+                <!--<ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="350" Height="auto" IsEditable="True"
+                          PreviewTextInput="comboBox_PreviewTextInput"  ToolTip="Введите первые 3 буквы фамилии"   Padding="5,5,5,5"  SelectionChanged="comboBox_SelectionChanged"
+                        SelectedValuePath="id"  >                  
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1} {2} {3:dd.MM.yyyy}">
+                                        <Binding Path="fam"/>
+                                        <Binding Path="name"/>
+                                        <Binding Path="parent"/>
+                                        <Binding Path="DOB"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>-->
+                <TextBox x:Name="txtBxSearch" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,10,10" HorizontalAlignment="Left"
+                                     Width="250" Padding="5,5,5,5" Height="auto" PreviewTextInput="txtBxSearch_PreviewTextInput"
+                                     ToolTip="Введите 3 символа">
+                </TextBox>
+             
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">         
+
+            <DataGrid x:Name="dataGridALLAthlets" Grid.Row="0" CanUserDeleteRows="False"
+                              AutoGenerateColumns="False" CanUserAddRows="False"
+                              Margin="10,10,10,10" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" SelectedItem="id" 
+                              MouseDoubleClick="dataGridALLAthlets_MouseDoubleClick" LoadingRow="dataGridALLAthlets_LoadingRow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding id,Mode=TwoWay}" Header="№"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding ip,Mode=TwoWay}" Header="ip" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding what,Mode=TwoWay}" Header="устройство" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding descripion,Mode=TwoWay}" Header="описание" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding uptime,Mode=TwoWay}" Header="uptime"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding end,Mode=TwoWay}"  Header="выкл."></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding up,Mode=TwoWay}" Header="вкл."></DataGridTextColumn>                  
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Итого:" Grid.Column="0" VerticalAlignment="Center" Margin="5,5,5,5" HorizontalAlignment="Center"/>
+                <Label x:Name="labelTotal" Content="......" Grid.Column="0" VerticalAlignment="Center" Margin="5,5,5,5" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Window>
