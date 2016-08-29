@@ -15,7 +15,7 @@ namespace monitoringLan
         {
             //puskService();
             tm.Elapsed += new ElapsedEventHandler(puskService); 
-            tm.Interval = 30000;
+            tm.Interval = 60000;
             tm.Start();         
         }      
 

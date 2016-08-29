@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         VerticalAlignment="Center"
         HorizontalAlignment="Stretch"
-        Title="MainWindow" Width="auto">
+        Loaded="Window_Loaded"
+        Title="Устройства" Width="auto" Height="auto">
     
     <Grid  x:Name="gridAll" Margin="10,10,10,10" FocusManager.FocusedElement="{Binding ElementName=Text_Filtr_DataGrid_Athletes}" VerticalAlignment="Top" HorizontalAlignment="Left">
         <Grid.RowDefinitions>
@@ -82,7 +83,7 @@
 
         <GroupBox Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">         
 
-            <DataGrid x:Name="dataGridALLAthlets" Grid.Row="0" CanUserDeleteRows="False"
+            <DataGrid x:Name="dataGridALLDevice" Grid.Row="0" CanUserDeleteRows="False"
                               AutoGenerateColumns="False" CanUserAddRows="False"
                               Margin="10,10,10,10" ScrollViewer.VerticalScrollBarVisibility="Visible"
                                VerticalAlignment="Top" HorizontalAlignment="Left" SelectedItem="id" 
@@ -90,11 +91,12 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding id,Mode=TwoWay}" Header="№"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding ip,Mode=TwoWay}" Header="ip" ></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding what,Mode=TwoWay}" Header="устройство" ></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding descripion,Mode=TwoWay}" Header="описание" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding type_device,Mode=TwoWay}" Header="устройство" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding description,Mode=TwoWay}" Header="описание" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding uptime,Mode=TwoWay}" Header="uptime"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding end,Mode=TwoWay}"  Header="выкл."></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding up,Mode=TwoWay}" Header="вкл."></DataGridTextColumn>                  
+                    <DataGridTextColumn Binding="{Binding down_device,Mode=TwoWay, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}"  Header="выкл."></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding up_device,Mode=TwoWay,StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}" Header="вкл."></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding status,Mode=TwoWay}" Header="статус"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

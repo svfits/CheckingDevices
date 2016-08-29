@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckingDevices.DataBase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,17 @@ namespace CheckingDevices
         private void dataGridALLAthlets_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (DeviceContext db = new DeviceContext())
+            {
+                var device = db.Device.ToList();
+
+                dataGridALLDevice.ItemsSource = device;
+                labelTotal.Content = device.Count;
+            }   
         }
     }
 }
