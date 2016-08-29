@@ -1,43 +1,58 @@
 ﻿using System;
-using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 using CheckingDevices.DataBase;
 using System.Linq;
-using System.Collections.Generic;
+using System.Timers;
 
 namespace monitoringLan
 {
     class Service
     {
-        private readonly int timerInterval = 600000 * 6;
-      
+        Timer tm = new Timer();      
+
         public void Start()
         {
-            string ip = "192.168.101.";    
-            using (DeviceContext db = new DeviceContext())
-            {
-              var deviceList =  db.Device;
-                foreach (var dd in deviceList)
-                {                  
-                    pinger(dd.ip);                               
-                }
-            }
-
-            for (int i=10;i<=253;i++)
-            {
-             string ip1 = ip + i.ToString();
-                //Console.WriteLine(ip1);
-                pingSearchNewDevice(ip1);
-                
-            }
-                   
+            //puskService();
+            tm.Elapsed += new ElapsedEventHandler(puskService); 
+            tm.Interval = 30000;
+            tm.Start();         
         }      
 
         public void Stop()
         {
+            tm.Stop();
+        }      
 
+     public  void puskService(object source, ElapsedEventArgs eventArgs)
+        {
+            Console.WriteLine(DateTime.Now + "  запустился ");
+            using (DeviceContext db = new DeviceContext())
+            {
+                var deviceList = db.Device;
+                foreach (var dd in deviceList)
+                {
+                    pinger(dd.ip);
+                }
+            }
+
+            using (DeviceContext db = new DeviceContext())
+            {
+                var bandList = db.BandsIp;
+
+                foreach (var dd in bandList)
+                {
+                    string[] ip2 = dd.band.Split('.');
+                    string tokens = ip2[0] + "." + ip2[1] + "." + ip2[2] + ".";
+
+                    for (int i = 10; i <= 253; i++)
+                    {
+                        string ip1 = tokens + i.ToString();
+                        //Console.WriteLine(ip1);
+                        pingSearchNewDevice(ip1);
+                    }
+                }
+            }
         }
 
         private void pinger(string address)
@@ -74,12 +89,35 @@ namespace monitoringLan
                
                 if (myDevice.status != status )
                 {
-                    db.Log.Add(new Log()
+                    if (status == "Работает")
                     {
-                        status = status,
-                        ip = ip,
-                        date = DateTime.Now
-                    });
+                        db.Log.Add(new Log()
+                        {
+                            status = status,
+                            ip = ip,
+                            date = DateTime.Now
+                        });
+
+                        myDevice.up_device = DateTime.Now;
+                        TimeSpan ts = myDevice.up_device - myDevice.down_device;
+                     
+                        Console.WriteLine(string.Format("{0:00} дней {1:00}:{2:00}:{3:00}",ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
+                        myDevice.uptime = string.Format("{0:00} дней {1:00}:{2:00}:{3:00}", ts.Days, ts.Hours, ts.Minutes, ts.Seconds);
+                    }
+                    if (status == "НЕ доступна")
+                    {
+                        db.Log.Add(new Log()
+                        {
+                            status = status,
+                            ip = ip,
+                            date = DateTime.Now
+                        });
+
+                        myDevice.down_device = DateTime.Now;
+                        myDevice.up_device = DateTime.Now;
+                        TimeSpan ts = myDevice.up_device - myDevice.down_device;
+                        myDevice.uptime = string.Format("{0:00} дней {1:00}:{2:00}:{3:00}", ts.Days, ts.Hours, ts.Minutes, ts.Seconds);
+                    }                 
                     
                     myDevice.status = status;
                     db.Entry(myDevice).State = System.Data.Entity.EntityState.Modified;
@@ -149,7 +187,7 @@ namespace monitoringLan
                         ip = address,
                         status = "новое устройство",
                         down_device = DateTime.Now,
-                        uptime = DateTime.Now,
+                        uptime = "",
                         type_device = "не известно",
                         up_device = DateTime.Now
                     });

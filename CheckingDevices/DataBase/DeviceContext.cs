@@ -15,6 +15,6 @@ namespace CheckingDevices.DataBase
 
         public DbSet<Log> Log { get; set; }
 
-             //public DbSet<Athletes> Athletes { get; set; }
+       public DbSet<BandsIp> BandsIp { get; set; }
     }
 }

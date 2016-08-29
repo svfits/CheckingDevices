@@ -16,7 +16,7 @@ namespace CheckingDevices.DataBase
 
         public string status { get; set; }
 
-        public DateTime uptime { get; set; }
+        public string uptime { get; set; }
 
         public DateTime down_device { get; set; }
 

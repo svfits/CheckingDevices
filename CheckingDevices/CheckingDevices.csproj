@@ -72,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataBase\BandsIp.cs" />
     <Compile Include="DataBase\Device.cs" />
     <Compile Include="DataBase\DeviceContext.cs" />
     <Compile Include="DataBase\Log.cs" />
@@ -81,9 +82,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201608251341198_fghfg.cs" />
-    <Compile Include="Migrations\201608251341198_fghfg.Designer.cs">
-      <DependentUpon>201608251341198_fghfg.cs</DependentUpon>
+    <Compile Include="Migrations\201608290130388_fff.cs" />
+    <Compile Include="Migrations\201608290130388_fff.Designer.cs">
+      <DependentUpon>201608290130388_fff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290304258_ghfg.cs" />
+    <Compile Include="Migrations\201608290304258_ghfg.Designer.cs">
+      <DependentUpon>201608290304258_ghfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290308244_ghfgff.cs" />
+    <Compile Include="Migrations\201608290308244_ghfgff.Designer.cs">
+      <DependentUpon>201608290308244_ghfgff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608290334537_qqqqqqqqqqq.cs" />
+    <Compile Include="Migrations\201608290334537_qqqqqqqqqqq.Designer.cs">
+      <DependentUpon>201608290334537_qqqqqqqqqqq.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -99,8 +112,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201608251341198_fghfg.resx">
-      <DependentUpon>201608251341198_fghfg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608290130388_fff.resx">
+      <DependentUpon>201608290130388_fff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290304258_ghfg.resx">
+      <DependentUpon>201608290304258_ghfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290308244_ghfgff.resx">
+      <DependentUpon>201608290308244_ghfgff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608290334537_qqqqqqqqqqq.resx">
+      <DependentUpon>201608290334537_qqqqqqqqqqq.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

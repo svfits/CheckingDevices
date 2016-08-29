@@ -7,13 +7,13 @@ namespace CheckingDevices.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class fghfg : IMigrationMetadata
+    public sealed partial class qqqqqqqqqqq : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fghfg));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(qqqqqqqqqqq));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608251341198_fghfg"; }
+            get { return "201608290334537_qqqqqqqqqqq"; }
         }
         
         string IMigrationMetadata.Source
